@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package monstercardgame;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,20 +23,25 @@ import java.util.Scanner;
  * @param playerWin is to keep track when there is a player
  * 
  */
-public class MonsterCardGame {
-    private Player player;
-    private Map<String, Player> twoPlayer;
+public class MonsterCardGame extends Duel{
+    private Trainer player;
+    private Map<String, Trainer> twoPlayer;
     private ArrayList<String> monsterName;
     static Cards card;
     static Scanner scanner;
     static String userInput;
-    static Move move;
+    static TrainerMove move;
     static boolean playerWin;
     static AttackTheOpponent attack;
-
+    
+    public MonsterCardGame(){
+        initializeTheGame();
+        initializePlayer("Bob", "male", true, false);
+        initializePlayer("Smith", "male", false, true);
+    }
     public void initializePlayer(String userName, String gender, boolean turn, boolean computer)
     {
-        player = new Player(userName, gender, turn, computer);
+        player = new Trainer(userName, gender, turn, computer);
         this.displayPlayer();
         
         //this.addMonsterToHandHardCode();   /// this is for unit testing
@@ -48,10 +52,10 @@ public class MonsterCardGame {
     public void initializeTheGame() {
         monsterName = new ArrayList<String>();
         card = new Cards();
-        move = new Move();
+        move = new TrainerMove();
         attack= new AttackTheOpponent();
         playerWin = false;
-        twoPlayer = new HashMap<String, Player>();
+        twoPlayer = new HashMap<String, Trainer>();
         scanner = new Scanner(System.in);
         monsterName.add("bird");
         monsterName.add("cat");
@@ -213,7 +217,7 @@ public class MonsterCardGame {
     {
         for (String in: twoPlayer.keySet())
         {
-            Player newPlayer = twoPlayer.get(in);
+            Trainer newPlayer = twoPlayer.get(in);
             if (newPlayer.getTurn() == false)
             {
                 player.setTurn(false);
@@ -227,7 +231,7 @@ public class MonsterCardGame {
     /**
      * This method is to put the game together.
      */
-    public void PlayGame()
+    public void round()
     {        
         for (String in: twoPlayer.keySet())
         {
@@ -271,7 +275,7 @@ public class MonsterCardGame {
         }    
     }
         
-    public Player getPlayer() {
+    public Trainer getPlayer() {
         return player;
     }
 
@@ -303,12 +307,12 @@ public class MonsterCardGame {
         player.addMonsterToHand(card.getName(), card);
     }
     
-    public Player getSinglePlayer(String key)
+    public Trainer getSinglePlayer(String key)
     {
         return twoPlayer.get(key);
     }
 
-    public void setPlayer(Player player) {
+    public void setPlayer(Trainer player) {
         this.player = player;
     }
         
@@ -372,7 +376,7 @@ public class MonsterCardGame {
         this.newLine(2);
     }
 
-    public Map<String, Player> getTwoPlayer() {
+    public Map<String, Trainer> getTwoPlayer() {
         return twoPlayer;
     }
     
