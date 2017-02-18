@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,14 +32,16 @@ public class Trainer {
     private int numberOfMove;
     private Map<String, Cards> cardsOnHand;
     private Map<String, Cards> monsterOnField;
-    private boolean turn;
-    private boolean computer;
+    private String turn;
+    private String computer;
+    private int points;
     
-    public Trainer(String userName, String gender, boolean turn, boolean computer) {
+    public Trainer(String userName, String gender, String turn, String computer, int points) {
         this.userName = userName;
         this.computer = computer;
         this.turn = turn;
         health = 50;
+        this.points = points;
         this.gender = gender;
         numberOfMove = 0;
         cardsOnHand = new HashMap<String, Cards>();
@@ -46,7 +49,15 @@ public class Trainer {
     }
 
     Trainer() {
-        
+        userName = "";
+    }
+    
+    public int getPoint(){
+    	return points;
+    }
+    
+    public void setPoint(int points){
+    	this.points = points;
     }
 
     public void gotAttack(int value)
@@ -54,11 +65,11 @@ public class Trainer {
         health = health - value;
     }
     
-    public boolean getComputer() {
+    public String getComputer() {
         return computer;
     }
 
-    public void setComputer(boolean computer) {
+    public void setComputer(String computer) {
         this.computer = computer;
     }
         
@@ -126,7 +137,7 @@ public class Trainer {
         return monsterOnField;
     }
 
-    public boolean getTurn() {
+    public String getTurn() {
         return turn;
     }
 
@@ -154,7 +165,7 @@ public class Trainer {
         this.monsterOnField = monsterOnField;
     }
 
-    public void setTurn(boolean turn) {
+    public void setTurn(String turn) {
         this.turn = turn;
     }   
 }

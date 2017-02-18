@@ -1,8 +1,50 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
 class Game extends Duel{
 	Player p1,p2;
+	ArrayList <Player> listOfPlayer = new ArrayList<Player>();
+	Scanner scanner = new Scanner(System.in);
+	String userInput;
+	
 	public Game(Player player1,Player player2){
-		p1=player1;
-		p2=player2;
+		System.out.println("Do you want start a new game?");
+		userInput = scanner.nextLine();
+		if (userInput.equals("yes") || userInput.equals("Yes") || userInput.equals("y")){
+			p1=new Player("Bob", 0);
+			p2=new Player("Smith", 0);
+			listOfPlayer.add(p1);
+			listOfPlayer.add(p2);
+	    }
+	    else{
+	    	for (int i = 0; i < 2; i++){
+	    		System.out.println("Please give me player name: ");
+	        	userInput = scanner.nextLine();
+	        	if (i == 0){
+	        		p1 = new LoadCastleWarsGame().loadGame(userInput);
+		        	listOfPlayer.add(p1);
+	        	}
+	        	else{
+	        		p2 = new LoadCastleWarsGame().loadGame(userInput);
+		        	listOfPlayer.add(p2);
+	        	}
+	        	if (p1.getUserName().equals("") || p2.getUserName().equals("")){
+	        		System.out.println("Sorry, can't find the userName on the data.");
+	        	    System.exit(1);
+	        	}
+	        	else{
+	        		if (i == 0){
+	        			p1 = new Player("John", 0);
+	        			listOfPlayer.add(p1);
+	        		}
+	        		else{
+	            		p2 = new Player("James", 0);
+	            		listOfPlayer.add(p2);
+	        		}
+	        	}
+	        	
+	    	}
+	    }  
 	}
 	public void getStats(Player player){
 		System.out.print("\tCastle: "+player.getCastle()+"\tFence: "+player.getFence()+"\t b:"+player.getBricks()+" w:"+player.getWeapons()+" c:"+player.getCrystals()+
@@ -42,6 +84,7 @@ class Game extends Duel{
 	}
 	public void checkForWin(Player p1,Player p2)
 	{
+		
 		//Users can win by destroying their enemy's castle or building their castle up to 100
 		String winner=null;
 		if(p1.getCastle()>99)
@@ -64,6 +107,14 @@ class Game extends Duel{
 		if (winner!=null)
 		{
 			System.out.println(winner+ " won!");
+			if (winner.contains("1")){
+				p1.setPoint(p1.getPoint() + 1);
+			}
+			else{
+				p2.setPoint(p2.getPoint() + 1);
+			}
+			new SaveCastleWarsGame().saveGame(listOfPlayer);
+			listOfPlayer.clear();
 			System.exit(0);//quit the game
 		}
 		

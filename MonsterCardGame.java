@@ -34,14 +34,34 @@ public class MonsterCardGame extends Duel{
     static boolean playerWin;
     static AttackTheOpponent attack;
     
+    
     public MonsterCardGame(){
         initializeTheGame();
-        initializePlayer("Bob", "male", true, false);
-        initializePlayer("Smith", "male", false, true);
+        System.out.println("Do you want start a new game?");
+        userInput = scanner.nextLine();
+        if (userInput.equals("yes") || userInput.equals("Yes") || userInput.equals("y")){
+        	 initializePlayer("Bob", "male", "1", "0");
+             initializePlayer("Smith", "male", "0", "1");
+        }
+        else{
+        	for (int i = 0; i < 2; i++){
+        		System.out.println("Please give me a name for a player and a computer: ");
+            	userInput = scanner.nextLine();
+            	player = new LoadMonsterCardGame().loadGame(userInput);
+            	if (player.getUserName().equals("") ){
+            		System.out.println("Sorry, can't find the userName on the data.");
+            	    System.exit(1);
+            	}
+            	else{
+            		this.addMonsterToHand();
+                	twoPlayer.put(player.getUserName(), player);
+            	}	
+        	}
+        }  
     }
-    public void initializePlayer(String userName, String gender, boolean turn, boolean computer)
+    public void initializePlayer(String userName, String gender, String turn, String computer)
     {
-        player = new Trainer(userName, gender, turn, computer);
+        player = new Trainer(userName, gender, turn, computer, 0);
         this.displayPlayer();
         
         //this.addMonsterToHandHardCode();   /// this is for unit testing
@@ -131,6 +151,8 @@ public class MonsterCardGame extends Duel{
     public void displayWinner()
     {
         System.out.println("Player : " +  player.getUserName() + " won the game.");
+        player.setPoint(player.getPoint() + 1);
+        this.quitGame();
     }
     
     
@@ -184,6 +206,11 @@ public class MonsterCardGame extends Duel{
         player.setNumberOfMove(0);
     }
     
+    public void quitGame(){
+    	new SaveMonsterCardGame().saveGame(twoPlayer);
+	    System.exit(1);
+    }
+    
     
     /**
      * This method is to allow AI to decide what to do and allowing the AI to decide it self what to do
@@ -218,10 +245,10 @@ public class MonsterCardGame extends Duel{
         for (String in: twoPlayer.keySet())
         {
             Trainer newPlayer = twoPlayer.get(in);
-            if (newPlayer.getTurn() == false)
+            if (newPlayer.getTurn().equals("0"))
             {
-                player.setTurn(false);
-                newPlayer.setTurn(true);
+                player.setTurn("0");
+                newPlayer.setTurn("1");
                 player = newPlayer;
                 break;
             }
@@ -236,14 +263,14 @@ public class MonsterCardGame extends Duel{
         for (String in: twoPlayer.keySet())
         {
             player = twoPlayer.get(in);
-            if (player.getTurn())
+            if (player.getTurn().equals("1"))
             {
                 break;
             }  
         }
         while (true)
         {
-            if (player.getComputer() == false)
+            if (player.getComputer().equals("0"))
             {
                 this.newLine(5);
                 this.DislpayCardOnHand();
@@ -373,6 +400,8 @@ public class MonsterCardGame extends Duel{
         System.out.println(player.getHealth());
         System.out.print("Number of Move: ");
         System.out.println(player.getNumberOfMove());
+        System.out.print("Won: ");
+        System.out.print(player.getPoint());
         this.newLine(2);
     }
 

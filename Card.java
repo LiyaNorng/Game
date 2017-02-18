@@ -1,6 +1,7 @@
 //We went with the Observer pattern because each card requires a certain amount of stocks for the player to be able to use it
 //The cards observe the player and update their boolean Playable to inform their strategy if they can use the card
 
+import java.io.Serializable;
 import java.util.*;
 public abstract class Card implements Observer{
 	String name; //card name	

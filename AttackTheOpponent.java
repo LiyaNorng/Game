@@ -75,7 +75,7 @@ public class AttackTheOpponent implements StrategyForAttack{
         for (String in:monsterGame.getTwoPlayer().keySet())
         {
             Trainer player = monsterGame.getTwoPlayer().get(in);
-            if (player.getTurn() == false)
+            if (player.getTurn().equals("0"))
             {
                 if (player.isThereAnyMonsterOnField())
                 {
@@ -100,7 +100,7 @@ public class AttackTheOpponent implements StrategyForAttack{
         for (String in: monsterGame.getTwoPlayer().keySet())
         {
             Trainer player = monsterGame.getTwoPlayer().get(in);
-            if (player.getTurn() == false)
+            if (player.getTurn().equals("0"))
             {
                 if (player.getHealth() <= 0)
                 {
@@ -127,7 +127,7 @@ public class AttackTheOpponent implements StrategyForAttack{
         for (String in: monsterGame.getTwoPlayer().keySet())
         {
             Trainer player = monsterGame.getTwoPlayer().get(in);
-            if (player.getTurn() == false)
+            if (player.getTurn().equals("0"))
             {
                 Cards card = player.getSingleMonsterOnField(key);
                 if (card.getHeartPoint() <= 0)
@@ -154,7 +154,7 @@ public class AttackTheOpponent implements StrategyForAttack{
         for (String in: monsterGame.getTwoPlayer().keySet())
         {
             newPlayer = monsterGame.getTwoPlayer().get(in);
-            if (newPlayer.getTurn() == false)
+            if (newPlayer.getTurn().equals("0"))
             {
                 break;
             }

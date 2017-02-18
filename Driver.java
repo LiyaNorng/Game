@@ -5,8 +5,8 @@ import org.junit.AfterClass;
 import org.junit.Test;
 
 public class Driver {
-	Player p1=new Player();
-	Player p2=new Player();
+	Player p1=new Player("Smith", 0);
+	Player p2=new Player("Bob", 0);
 	
 	@Test
 	public void useCardtest()
@@ -37,7 +37,7 @@ public class Driver {
 		//add Banshee card to player's hand
 		//assert the card is not playable because player doesn't start off with enough stocks
 		Card card=new Banshee();
-		Player player=new Player();
+		Player player=new Player("Smith", 0);
 		player.exchangeCard(player.getHand().getCard(1),card);
 		assertEquals("Banshee",player.getHand().getCard(7).getName());
 		assertFalse(player.getHand().getCard(7).isPlayable());
@@ -47,7 +47,7 @@ public class Driver {
 		//add Fence card to player's hand
 		//assert the card is not playable because player doesn't start off with enough stocks
 		Card card=new Fence();
-		Player player=new Player();
+		Player player=new Player("Smith", 0);
 		player.exchangeCard(player.getHand().getCard(1),card);
 		assertEquals("Fence",player.getHand().getCard(7).getName());
 		assertFalse(player.getHand().getCard(7).isPlayable());
@@ -57,7 +57,7 @@ public class Driver {
 		//add Platoon card to player's hand
 		//assert the card is playable because player starts off with enough stocks
 		Card card=new Platoon();
-		Player player=new Player();
+		Player player=new Player("Smith", 0);
 		player.exchangeCard(player.getHand().getCard(1),card);
 		assertEquals("Platoon",player.getHand().getCard(7).getName());
 		assertTrue(player.getHand().getCard(7).isPlayable());
@@ -67,7 +67,7 @@ public class Driver {
 		//add Platoon card to player's hand
 		//assert the card is playable because player starts off with enough stocks
 		Card card=new Wall();
-		Player player=new Player();
+		Player player=new Player("Smith", 0);
 		player.exchangeCard(player.getHand().getCard(1),card);
 		assertEquals("Wall",player.getHand().getCard(7).getName());
 		assertTrue(player.getHand().getCard(7).isPlayable());
@@ -77,7 +77,7 @@ public class Driver {
 		//add Attack card to player's hand
 		//assert the card is not playable because player doesn't start off with enough stocks
 		Card card=new Attacks();
-		Player player=new Player();
+		Player player=new Player("Smith", 0);
 		player.exchangeCard(player.getHand().getCard(1),card);
 		assertEquals("Attack",player.getHand().getCard(7).getName());
 		assertFalse(player.getHand().getCard(7).isPlayable());
@@ -87,7 +87,7 @@ public class Driver {
 		//add Knight card to player's hand
 		//assert the card is playable because player starts off with enough stocks
 		Card card=new Knight();
-		Player player=new Player();
+		Player player=new Player("Smith", 0);
 		player.exchangeCard(player.getHand().getCard(1),card);
 		assertEquals("Knight",player.getHand().getCard(7).getName());
 		assertTrue(player.getHand().getCard(7).isPlayable());
@@ -97,7 +97,7 @@ public class Driver {
 		//add Babylon card to player's hand
 		//assert the card is not playable because player doesn't start off with enough stocks
 		Card card=new Babylon();
-		Player player=new Player();
+		Player player=new Player("Smith", 0);
 		player.exchangeCard(player.getHand().getCard(1),card);
 		assertEquals("Babylon",player.getHand().getCard(7).getName());
 		assertFalse(player.getHand().getCard(7).isPlayable());
@@ -107,7 +107,7 @@ public class Driver {
 		//add Babylon card to player's hand
 		//assert the card is not playable because player doesn't start off with enough stocks
 		Card card=new Dragon();
-		Player player=new Player();
+		Player player=new Player("Smith", 0);
 		player.exchangeCard(player.getHand().getCard(1),card);
 		assertEquals("Dragon",player.getHand().getCard(7).getName());
 		assertFalse(player.getHand().getCard(7).isPlayable());
@@ -117,7 +117,7 @@ public class Driver {
 		//add Babylon card to player's hand
 		//assert the card is not playable because player doesn't start off with enough stocks
 		Card card=new Pixies();
-		Player player=new Player();
+		Player player=new Player("Smith", 0);
 		player.exchangeCard(player.getHand().getCard(1),card);
 		assertEquals("Pixies",player.getHand().getCard(7).getName());
 		assertFalse(player.getHand().getCard(7).isPlayable());
@@ -127,7 +127,7 @@ public class Driver {
 		//add Tower card to player's hand
 		//assert the card is playable because player starts off with enough stocks
 		Card card=new Tower();
-		Player player=new Player();
+		Player player=new Player("Smith", 0);
 		player.exchangeCard(player.getHand().getCard(1),card);
 		assertEquals("Tower",player.getHand().getCard(7).getName());
 		assertTrue(player.getHand().getCard(7).isPlayable());
@@ -137,7 +137,7 @@ public class Driver {
 		//add Wain card to player's hand
 		//assert the card is not playable because player doesn't start off with enough stocks
 		Card card=new Wain();
-		Player player=new Player();
+		Player player=new Player("Smith", 0);
 		player.exchangeCard(player.getHand().getCard(1),card);
 		assertEquals("Wain",player.getHand().getCard(7).getName());
 		assertFalse(player.getHand().getCard(7).isPlayable());
@@ -147,7 +147,7 @@ public class Driver {
 		//add School card to players hand
 		//assert the card is not playable because player doesn't start of with enough stocks
 		Card card=new School();
-		Player player=new Player();
+		Player player=new Player("Smith", 0);
 		player.exchangeCard(player.getHand().getCard(1),card);
 		assertEquals("School",player.getHand().getCard(7).getName());
 		assertFalse(player.getHand().getCard(7).isPlayable());	
@@ -157,7 +157,7 @@ public class Driver {
 		//add Conjure Crystal card to player's hand
 		//assert the card is playable because player starts off with enough stocks
 		Card card=new ConjureCrystal();
-		Player player=new Player();
+		Player player=new Player("Smith", 0);
 		player.exchangeCard(player.getHand().getCard(1),card);
 		assertEquals("Conjure Crystals",player.getHand().getCard(7).getName());
 		assertTrue(player.getHand().getCard(7).isPlayable());
@@ -167,7 +167,7 @@ public class Driver {
 		//add Rider card to players hand
 		//assert the card is playable because player starts off with enough stocks
 		Card card=new Rider();
-		Player player=new Player();
+		Player player=new Player("Smith", 0);
 		player.exchangeCard(player.getHand().getCard(1),card);
 		assertEquals("Rider",player.getHand().getCard(7).getName());
 		assertTrue(player.getHand().getCard(7).isPlayable());
@@ -177,7 +177,7 @@ public class Driver {
 		//add School card to players hand
 		//assert the card is not playable because player doesn't start of with enough stocks
 		Card card=new Fort();
-		Player player=new Player();
+		Player player=new Player("Smith", 0);
 		player.exchangeCard(player.getHand().getCard(1),card);
 		assertEquals("Fort",player.getHand().getCard(7).getName());
 		assertFalse(player.getHand().getCard(7).isPlayable());		
@@ -185,8 +185,8 @@ public class Driver {
 	@AfterClass
 	public static void runOnce(){
 		System.out.println("\n\n\nBattle\n\n\n");
-		Player p1=new Player();
-		Player p2=new Player();
+		Player p1=new Player("Smith", 0);
+		Player p2=new Player("Bob", 0);
 		p1.changeStrategy(new Attack());
 		Duel game = new Game(p1,p2);
 		game.play();

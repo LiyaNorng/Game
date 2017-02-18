@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.util.*;
 
 class Player extends Observable{
@@ -9,10 +10,12 @@ class Player extends Observable{
 	private int crystals;
 	private int castle;
 	private int fence;
+	private int point;
+	private String userName;
 	private Hand hand;
 	private Strategy strategy; //attack or basic
 	
-	public Player(){
+	public Player(String userName, int point){
 		builders=2;
 		bricks=5;
 		soldiers=2;
@@ -21,6 +24,8 @@ class Player extends Observable{
 		crystals=5;
 		castle=30;
 		fence=10;
+		this.point = point;
+		this.userName = userName;
 		hand=new Hand();
 		for (int i=0;i<hand.size();i++)
 		{
@@ -30,7 +35,18 @@ class Player extends Observable{
 		}
 		strategy= new Basic();
 	}
-
+	public void setPoint(int point){
+		this.point = point;
+	}
+	public int getPoint(){
+		return point;
+	}
+	public void setUserName(String userName){
+		this.userName = userName;
+	}
+	public String getUserName(){
+		return userName;
+	}
 	public void changeHand(Hand h){
 		hand=h;
 	}
