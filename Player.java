@@ -13,6 +13,7 @@ class Player extends Observable{
 	private int point;
 	private String userName;
 	private Hand hand;
+	private String load;
 	private Strategy strategy; //attack or basic
 	
 	public Player(String userName, int point){
@@ -34,6 +35,12 @@ class Player extends Observable{
 			notifyObservers();
 		}
 		strategy= new Basic();
+	}
+	public String getLoad(){
+		return load;
+	}
+	public void setLoad(String load){
+		this.load = load;
 	}
 	public void setPoint(int point){
 		this.point = point;

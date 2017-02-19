@@ -8,8 +8,8 @@ class Demo {
 		game.play();
 		
 		
-		GameFactory mc=new MonsterCardsFactory();
-		Duel game2=mc.createGame();
-		game2.play();
+		//GameFactory mc=new MonsterCardsFactory();
+		//Duel game2=mc.createGame();
+		//game2.play();
 	}
 }

@@ -4,7 +4,7 @@ import java.io.IOException;
 
 public class LoadCastleWarsGame {
 	public Player loadGame(String name){
-		Player player = null;
+		Player player = new Player("", 0);
 		FileReader file_Input;
 		BufferedReader buffer;
 		String userName;
@@ -22,6 +22,7 @@ public class LoadCastleWarsGame {
 					player = new Player(userName, point);
 					break;
 				}
+
 			}
             buffer.close();
 		}

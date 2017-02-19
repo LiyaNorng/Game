@@ -35,6 +35,7 @@ public class Trainer {
     private String turn;
     private String computer;
     private int points;
+    private String load;
     
     public Trainer(String userName, String gender, String turn, String computer, int points) {
         this.userName = userName;
@@ -52,6 +53,12 @@ public class Trainer {
         userName = "";
     }
     
+    public void setLoad(String load){
+    	this.load = load;
+    }
+    public String getLoad(){
+    	return load;
+    }
     public int getPoint(){
     	return points;
     }

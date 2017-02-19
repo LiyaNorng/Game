@@ -16,18 +16,27 @@ public class SaveCastleWarsGame {
         	for (int i = 0; i < player.size(); i++){
     			setPlayer = player.get(i);
         		if (i == 0){
-                	playerTwoUserName = setPlayer.getUserName();
+                	playerOneUserName = setPlayer.getUserName();
         		}
         		else{
-                	playerOneUserName = setPlayer.getUserName();
+                	playerTwoUserName = setPlayer.getUserName();
         		}
         	}
 			FileReader file_Input = new FileReader("textFiles.txt");
 			BufferedReader buffers = new BufferedReader(file_Input);
 			while((line = buffers.readLine()) != null){
 				if (line.equals(playerOneUserName) || line.equals(playerTwoUserName)){
-					buffers.readLine();
-					buffers.readLine();
+					if (player.get(0).getLoad().equals("new")){
+						player.get(0).setLoad("");
+						player.get(0).setPoint(player.get(0).getPoint() + Integer.valueOf(buffers.readLine()));
+					}
+					else if (player.get(1).getLoad().equals("new")){
+						player.get(1).setLoad("");
+						player.get(1).setPoint(player.get(1).getPoint() + Integer.valueOf(buffers.readLine()));
+					}
+					else if (player.get(0).getLoad().equals("load") || (player.get(0).getLoad().equals("load"))){
+						buffers.readLine();
+					}
 				}
 				else
 				{
@@ -49,7 +58,9 @@ public class SaveCastleWarsGame {
     			buffer.write(setPlayer.getUserName());
     			buffer.newLine();
     			buffer.write(String.valueOf(setPlayer.getPoint()));
-    			buffer.newLine();
+    			if (i != player.size() - 1){
+        			buffer.newLine();
+    			}
 	        }   
 	    	buffer.close();
 	    	buffers.close();

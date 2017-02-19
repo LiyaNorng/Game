@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 class Game extends Duel{
-	Player p1,p2;
+	Player p1,p2, player;
 	ArrayList <Player> listOfPlayer = new ArrayList<Player>();
 	Scanner scanner = new Scanner(System.in);
 	String userInput;
@@ -13,6 +13,8 @@ class Game extends Duel{
 		if (userInput.equals("yes") || userInput.equals("Yes") || userInput.equals("y")){
 			p1=new Player("Bob", 0);
 			p2=new Player("Smith", 0);
+			p1.setLoad("new");
+			p2.setLoad("new");
 			listOfPlayer.add(p1);
 			listOfPlayer.add(p2);
 	    }
@@ -20,31 +22,26 @@ class Game extends Duel{
 	    	for (int i = 0; i < 2; i++){
 	    		System.out.println("Please give me player name: ");
 	        	userInput = scanner.nextLine();
-	        	if (i == 0){
-	        		p1 = new LoadCastleWarsGame().loadGame(userInput);
-		        	listOfPlayer.add(p1);
-	        	}
-	        	else{
-	        		p2 = new LoadCastleWarsGame().loadGame(userInput);
-		        	listOfPlayer.add(p2);
-	        	}
-	        	if (p1.getUserName().equals("") || p2.getUserName().equals("")){
-	        		System.out.println("Sorry, can't find the userName on the data.");
-	        	    System.exit(1);
-	        	}
-	        	else{
-	        		if (i == 0){
-	        			p1 = new Player("John", 0);
-	        			listOfPlayer.add(p1);
-	        		}
-	        		else{
-	            		p2 = new Player("James", 0);
-	            		listOfPlayer.add(p2);
-	        		}
-	        	}
-	        	
-	    	}
-	    }  
+            	player = new LoadCastleWarsGame().loadGame(userInput);
+            	if (player.getUserName().equals("") ){
+            		System.out.println("Sorry, can't find the userName on the data.");
+            	    System.exit(1);
+            	}
+            	else{
+            		player.setLoad("load");
+                	listOfPlayer.add(player);
+                	
+            	}	
+        	}
+	    }
+		for ( int i = 0; i < listOfPlayer.size(); i++){
+			if (i == 0){
+				p1 = listOfPlayer.get(i);
+			}
+			else{
+				p2 = listOfPlayer.get(i);
+			}
+		}
 	}
 	public void getStats(Player player){
 		System.out.print("\tCastle: "+player.getCastle()+"\tFence: "+player.getFence()+"\t b:"+player.getBricks()+" w:"+player.getWeapons()+" c:"+player.getCrystals()+

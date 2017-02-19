@@ -11,7 +11,7 @@ import java.util.Map;
 
 public class SaveMonsterCardGame{
 	
-	public void saveGame(Map<String, Trainer> player){
+	public void saveGame(Map<String, Trainer> player, String playerWon){
 		try{
 			ArrayList <String> listOfPlayer = new ArrayList<String>();
         	String line = "";
@@ -35,8 +35,13 @@ public class SaveMonsterCardGame{
 					buffers.readLine();
 					buffers.readLine();
 					buffers.readLine();
-					buffers.readLine();
-					buffers.readLine();
+					line = buffers.readLine();
+					if (playerWon.equals(playerOneUserName) && player.get(playerOneUserName).getLoad().equals("new")){
+						player.get(playerOneUserName).setPoint(player.get(playerOneUserName).getPoint() + Integer.valueOf(line));
+					}
+					else if (playerWon.equals(computerUserName) && player.get(computerUserName).getLoad().equals("new")){
+						player.get(computerUserName).setPoint(player.get(computerUserName).getPoint() + Integer.valueOf(line));
+					}
 				}
 				else
 				{

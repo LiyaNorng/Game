@@ -41,7 +41,9 @@ public class MonsterCardGame extends Duel{
         userInput = scanner.nextLine();
         if (userInput.equals("yes") || userInput.equals("Yes") || userInput.equals("y")){
         	 initializePlayer("Bob", "male", "1", "0");
+        	 player.setLoad("new");
              initializePlayer("Smith", "male", "0", "1");
+        	 player.setLoad("new");
         }
         else{
         	for (int i = 0; i < 2; i++){
@@ -54,6 +56,7 @@ public class MonsterCardGame extends Duel{
             	}
             	else{
             		this.addMonsterToHand();
+            		player.setLoad("load");
                 	twoPlayer.put(player.getUserName(), player);
             	}	
         	}
@@ -207,7 +210,7 @@ public class MonsterCardGame extends Duel{
     }
     
     public void quitGame(){
-    	new SaveMonsterCardGame().saveGame(twoPlayer);
+    	new SaveMonsterCardGame().saveGame(twoPlayer, player.getUserName());
 	    System.exit(1);
     }
     
