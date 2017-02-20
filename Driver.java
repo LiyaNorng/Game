@@ -185,12 +185,19 @@ public class Driver {
 	@AfterClass
 	public static void runOnce(){
 		System.out.println("\n\n\nBattle\n\n\n");
+<<<<<<< Updated upstream
 		Player p1=new PlayerName("Smith", 0, 1);
 		Player p2=new PlayerName("Bob", 0, 1);
 		p1.changeStrategy(new Attack());
 		Duel game = new Game(p1,p2);
+=======
+		GameFactory cw=new CastleWarsFactory();
+		Duel game = cw.createGame();
+>>>>>>> Stashed changes
 		game.play();
+		
 	}
+	
 	
 
 }

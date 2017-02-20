@@ -6,6 +6,8 @@ class Game extends Duel{
 	ArrayList <Player> listOfPlayer = new ArrayList<Player>();
 	Scanner scanner = new Scanner(System.in);
 	String userInput;
+	boolean campaign=false;
+	int stage=1;
 	
 	public Game(Player player1,Player player2){
 		System.out.println("Do you want start a new game?");
@@ -42,6 +44,10 @@ class Game extends Duel{
 				p2 = listOfPlayer.get(i);
 			}
 		}
+		System.out.println("Would you like to play the campaign mode?");
+		userInput=scanner.nextLine();
+		if (userInput.equals("yes") || userInput.equals("Yes") || userInput.equals("y"))
+			campaign=true;
 	}
 	public void getStats(Player player){
 		System.out.print("\tCastle: "+player.getCastle()+"\tFence: "+player.getFence()+"\t b:"+player.getBricks()+" w:"+player.getWeapons()+" c:"+player.getCrystals()+
@@ -104,17 +110,44 @@ class Game extends Duel{
 		if (winner!=null)
 		{
 			System.out.println(winner+ " won!");
-			if (winner.contains("1")){
-				p1.setPoint(p1.getPoint() + 1);
+			if (!campaign){
+				if (winner.contains("1")){
+					p1.setPoint(p1.getPoint() + 1);
+				}
+				else{
+					p2.setPoint(p2.getPoint() + 1);
+				}
+				new SaveCastleWarsGame().saveGame(listOfPlayer);
+				listOfPlayer.clear();
 			}
-			else{
-				p2.setPoint(p2.getPoint() + 1);
-			}
-			new SaveCastleWarsGame().saveGame(listOfPlayer);
-			listOfPlayer.clear();
-			System.exit(0);//quit the game
+			if (campaign){
+				if (winner.contains("1")){
+					if (stage==1)
+					{
+						playMediumDifficulty();
+					}
+					else if(stage==2)
+						playHardDifficulty();
+					else if (stage==3)
+						System.out.println("You won the campaign challenge");
+				}
+				else{ System.out.println("You lost the campaign challenge in stage "+stage);
+					System.exit(0);}
+			}else System.exit(0);//quit the game
 		}
 		
+	}
+	public void playMediumDifficulty(){
+		p1.resetPlayer();
+		p2.resetPlayer();
+		p2.buildFence(10);
+		super.play();
+	}
+	public void playHardDifficulty(){
+		p1.resetPlayer();
+		p2.resetPlayer();
+		p2.buildFence(15);
+		super.play();
 	}
 	//bricks are increased depending on how many builders you have
 	//weapons are increased depending on how many soldiers you have
