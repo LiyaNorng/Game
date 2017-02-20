@@ -29,12 +29,15 @@ public class SaveCastleWarsGame {
 					if (player.get(0).getLoad().equals("new")){
 						player.get(0).setLoad("");
 						player.get(0).setPoint(player.get(0).getPoint() + Integer.valueOf(buffers.readLine()));
+						player.get(0).setLevel(Integer.valueOf(buffers.readLine()));
 					}
 					else if (player.get(1).getLoad().equals("new")){
 						player.get(1).setLoad("");
 						player.get(1).setPoint(player.get(1).getPoint() + Integer.valueOf(buffers.readLine()));
+						player.get(1).setLevel(Integer.valueOf(buffers.readLine()));
 					}
 					else if (player.get(0).getLoad().equals("load") || (player.get(0).getLoad().equals("load"))){
+						buffers.readLine();
 						buffers.readLine();
 					}
 				}
@@ -57,7 +60,13 @@ public class SaveCastleWarsGame {
 	    		setPlayer = player.get(i);
     			buffer.write(setPlayer.getUserName());
     			buffer.newLine();
+    			if (setPlayer.getPoint() >= 3){
+    				setPlayer.setLevel(setPlayer.getLevel() + 1);
+    				setPlayer.setPoint(0);
+    			}
     			buffer.write(String.valueOf(setPlayer.getPoint()));
+    			buffer.newLine();
+    			buffer.write(String.valueOf(setPlayer.getLevel()));
     			if (i != player.size() - 1){
         			buffer.newLine();
     			}

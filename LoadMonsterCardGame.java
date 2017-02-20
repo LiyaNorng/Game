@@ -12,6 +12,7 @@ public class LoadMonsterCardGame {
 		String gender;
 		String turn;
 		String computer;
+		int level;
 		String line = "";
 		int point;
 
@@ -26,7 +27,8 @@ public class LoadMonsterCardGame {
 					turn = buffer.readLine();
 					computer = buffer.readLine();
 					point = Integer.valueOf(buffer.readLine());
-					player = new Trainer(userName, gender, turn, computer, point);
+					level = Integer.valueOf(buffer.readLine());
+					player = new TotalPoints(userName, gender, turn, computer, point, level);
 					break;
 				}
 			}

@@ -64,7 +64,7 @@ public class MonsterCardGame extends Duel{
     }
     public void initializePlayer(String userName, String gender, String turn, String computer)
     {
-        player = new Trainer(userName, gender, turn, computer, 0);
+        player = new TotalPoints(userName, gender, turn, computer, 0, 1);
         this.displayPlayer();
         
         //this.addMonsterToHandHardCode();   /// this is for unit testing
@@ -404,7 +404,9 @@ public class MonsterCardGame extends Duel{
         System.out.print("Number of Move: ");
         System.out.println(player.getNumberOfMove());
         System.out.print("Won: ");
-        System.out.print(player.getPoint());
+        System.out.println(player.getPoint());
+        System.out.print("Level: ");
+        System.out.print(player.getLevel());
         this.newLine(2);
     }
 

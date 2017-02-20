@@ -4,10 +4,11 @@ import java.io.IOException;
 
 public class LoadCastleWarsGame {
 	public Player loadGame(String name){
-		Player player = new Player("", 0);
+		Player player = new PlayerName("", 0, 1);
 		FileReader file_Input;
 		BufferedReader buffer;
 		String userName;
+		int level;
 		String line = "";
 		int point;
 
@@ -19,7 +20,8 @@ public class LoadCastleWarsGame {
 				if (name.equals(line)){
 					userName = line;
 					point = Integer.valueOf(buffer.readLine());
-					player = new Player(userName, point);
+					level = Integer.valueOf(buffer.readLine());
+					player = new PlayerName(userName, point, level);
 					break;
 				}
 

@@ -1,22 +1,23 @@
 import java.io.Serializable;
 import java.util.*;
 
-class Player extends Observable{
-	private int builders;
-	private int bricks;
-	private int soldiers;
-	private int weapons;
-	private int magic;
-	private int crystals;
-	private int castle;
-	private int fence;
-	private int point;
-	private String userName;
-	private Hand hand;
-	private String load;
-	private Strategy strategy; //attack or basic
+class Player extends Observable implements PlayerProperty{
+	protected int builders;
+	protected int bricks;
+	protected int soldiers;
+	protected int weapons;
+	protected int magic;
+	protected int crystals;
+	protected int castle;
+	protected int fence;
+	protected int point;
+	protected String userName;
+	protected Hand hand;
+	protected String load;
+	protected int level;
+	protected Strategy strategy; //attack or basic
 	
-	public Player(String userName, int point){
+	public Player(){
 		builders=2;
 		bricks=5;
 		soldiers=2;
@@ -25,8 +26,6 @@ class Player extends Observable{
 		crystals=5;
 		castle=30;
 		fence=10;
-		this.point = point;
-		this.userName = userName;
 		hand=new Hand();
 		for (int i=0;i<hand.size();i++)
 		{
@@ -35,6 +34,12 @@ class Player extends Observable{
 			notifyObservers();
 		}
 		strategy= new Basic();
+	}
+	public void setLevel(int level){
+		this.level = level;
+	}
+	public int getLevel(){
+		return level;
 	}
 	public String getLoad(){
 		return load;
@@ -147,6 +152,11 @@ class Player extends Observable{
 		addObserver(newCard);
 		setChanged();
 		notifyObservers();
+	}
+	@Override
+	public void update() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

@@ -11,8 +11,8 @@ class Game extends Duel{
 		System.out.println("Do you want start a new game?");
 		userInput = scanner.nextLine();
 		if (userInput.equals("yes") || userInput.equals("Yes") || userInput.equals("y")){
-			p1=new Player("Bob", 0);
-			p2=new Player("Smith", 0);
+			p1=new PlayerName("Bob", 0, 1);
+			p2=new PlayerName("Smith", 0, 1);
 			p1.setLoad("new");
 			p2.setLoad("new");
 			listOfPlayer.add(p1);

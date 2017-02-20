@@ -24,25 +24,25 @@ import java.util.Map;
  * @param computer to keep track whether this player is computer or user
  */
 
-public class Trainer {
+public class Trainer implements PlayerPropertys{
     
-    private String userName;
-    private int health;
-    private String gender;
-    private int numberOfMove;
-    private Map<String, Cards> cardsOnHand;
-    private Map<String, Cards> monsterOnField;
-    private String turn;
-    private String computer;
-    private int points;
-    private String load;
+    protected String userName;
+    protected int health;
+    protected String gender;
+    protected int numberOfMove;
+    protected Map<String, Cards> cardsOnHand;
+    protected Map<String, Cards> monsterOnField;
+    protected String turn;
+    protected String computer;
+    protected int points;
+    protected String load;
+    protected int level;
     
-    public Trainer(String userName, String gender, String turn, String computer, int points) {
+    public Trainer(String userName, String gender, String turn, String computer) {
         this.userName = userName;
         this.computer = computer;
         this.turn = turn;
         health = 50;
-        this.points = points;
         this.gender = gender;
         numberOfMove = 0;
         cardsOnHand = new HashMap<String, Cards>();
@@ -53,6 +53,12 @@ public class Trainer {
         userName = "";
     }
     
+    public void setLevel(int level){
+    	this.level = level;
+    }
+    public int getLevel(){
+    	return level;
+    }
     public void setLoad(String load){
     	this.load = load;
     }
@@ -174,5 +180,11 @@ public class Trainer {
 
     public void setTurn(String turn) {
         this.turn = turn;
-    }   
+    }
+
+	@Override
+	public void update() {
+		// TODO Auto-generated method stub
+		
+	}   
 }

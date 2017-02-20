@@ -38,9 +38,15 @@ public class SaveMonsterCardGame{
 					line = buffers.readLine();
 					if (playerWon.equals(playerOneUserName) && player.get(playerOneUserName).getLoad().equals("new")){
 						player.get(playerOneUserName).setPoint(player.get(playerOneUserName).getPoint() + Integer.valueOf(line));
+						player.get(playerOneUserName).setLevel(Integer.valueOf(buffers.readLine()));
 					}
 					else if (playerWon.equals(computerUserName) && player.get(computerUserName).getLoad().equals("new")){
 						player.get(computerUserName).setPoint(player.get(computerUserName).getPoint() + Integer.valueOf(line));
+						player.get(computerUserName).setLevel(Integer.valueOf(buffers.readLine()));
+					}
+					else
+					{
+						buffers.readLine();
 					}
 				}
 				else
@@ -72,7 +78,13 @@ public class SaveMonsterCardGame{
     			buffer.newLine();
     			buffer.write(setPlayer.getComputer());
     			buffer.newLine();
+    			if (setPlayer.getPoint() >= 3){
+    				setPlayer.setLevel(setPlayer.getLevel() + 1);
+    				setPlayer.setPoint(0);
+    			}
     			buffer.write(String.valueOf(setPlayer.getPoint()));
+    			buffer.newLine();
+    			buffer.write(String.valueOf(setPlayer.getLevel()));
     			buffer.newLine();
 	        }   
 	    	buffer.close();
