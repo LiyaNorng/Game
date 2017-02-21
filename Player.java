@@ -35,13 +35,12 @@ class Player extends Observable implements PlayerProperty{
 		}
 		strategy= new Basic();
 	}
-<<<<<<< Updated upstream
 	public void setLevel(int level){
 		this.level = level;
 	}
 	public int getLevel(){
 		return level;
-=======
+	}
 	public void resetPlayer(){
 		builders=2;
 		bricks=5;
@@ -51,7 +50,6 @@ class Player extends Observable implements PlayerProperty{
 		crystals=5;
 		castle=30;
 		fence=10;
->>>>>>> Stashed changes
 	}
 	public String getLoad(){
 		return load;

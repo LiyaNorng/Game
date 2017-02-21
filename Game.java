@@ -13,8 +13,8 @@ class Game extends Duel{
 		System.out.println("Do you want start a new game?");
 		userInput = scanner.nextLine();
 		if (userInput.equals("yes") || userInput.equals("Yes") || userInput.equals("y")){
-			p1=new PlayerName("Bob", 0, 1);
-			p2=new PlayerName("Smith", 0, 1);
+			Player p1=new PlayerName("Smith", 0, 1);
+			Player p2=new PlayerName("Bob", 0, 1);
 			p1.setLoad("new");
 			p2.setLoad("new");
 			listOfPlayer.add(p1);
@@ -122,14 +122,24 @@ class Game extends Duel{
 			}
 			if (campaign){
 				if (winner.contains("1")){
-					if (stage==1)
+					if (stage==3){
+						System.out.println("You won the campaign challenge");
+						System.exit(0);
+					}
+					else if (stage==1)
 					{
+						System.out.println("\n\n\n======================================");
+						System.out.println("Congratulations you passed stage 1");
+						System.out.println("======================================\n\n\n");
+						stage+=1;
 						playMediumDifficulty();
 					}
-					else if(stage==2)
-						playHardDifficulty();
-					else if (stage==3)
-						System.out.println("You won the campaign challenge");
+					else if(stage==2){
+						System.out.println("\n\n\n======================================");
+						System.out.println("Congratulations you passed stage 1");
+						System.out.println("======================================\n\n\n");
+						stage+=1;
+						playHardDifficulty();}
 				}
 				else{ System.out.println("You lost the campaign challenge in stage "+stage);
 					System.exit(0);}
