@@ -44,6 +44,7 @@ public class MonsterCardGame extends Duel{
         	 player.setLoad("new");
              initializePlayer("Smith", "male", "0", "1");
         	 player.setLoad("new");
+
         }
         else{
         	for (int i = 0; i < 2; i++){

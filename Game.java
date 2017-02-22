@@ -19,6 +19,41 @@ class Game extends Duel{
 			p2.setLoad("new");
 			listOfPlayer.add(p1);
 			listOfPlayer.add(p2);
+			
+			System.out.println("Would you like to select a character race?");
+			userInput=scanner.nextLine();
+			if(userInput.equalsIgnoreCase("yes")||userInput.equalsIgnoreCase("y")){
+				System.out.println("Select a race: Human, Dwarf, Elven or DragonBorn");
+				userInput=scanner.nextLine();
+				if(userInput.equalsIgnoreCase("human")){
+					p1 = new HumanRace();
+				}else if(userInput.equalsIgnoreCase("dwarf")){
+					p1 = new DwarfRace();
+				}else if(userInput.equalsIgnoreCase("elven")){
+					p1 = new ElvenRace();
+				}else if(userInput.equalsIgnoreCase("dragonborn")){
+					p1 = new DragonBornRace();
+				}
+			}
+			System.out.println("Would you like to select a class?");
+			userInput=scanner.nextLine();
+			if(userInput.equalsIgnoreCase("yes")||userInput.equalsIgnoreCase("y")){
+				System.out.println("Select a class: Cleric, Babarian, Paladin or Ranger");
+				userInput=scanner.nextLine();
+				if(userInput.equalsIgnoreCase("cleric")){
+					p1 = new Cleric(p1);
+				}else if(userInput.equalsIgnoreCase("barbarian")){
+					p1 = new Barbarian(p1);
+				}else if(userInput.equalsIgnoreCase("paladin")){
+					p1 = new Paladin(p1);
+				}else if(userInput.equalsIgnoreCase("Ranger")){
+					p1 = new Ranger(p1);
+				}
+			}
+			System.out.println("Would you like to play the campaign mode?");
+			userInput=scanner.nextLine();
+			if (userInput.equals("yes") || userInput.equals("Yes") || userInput.equals("y"))
+				campaign=true;
 	    }
 	    else{
 	    	for (int i = 0; i < 2; i++){
@@ -44,10 +79,7 @@ class Game extends Duel{
 				p2 = listOfPlayer.get(i);
 			}
 		}
-		System.out.println("Would you like to play the campaign mode?");
-		userInput=scanner.nextLine();
-		if (userInput.equals("yes") || userInput.equals("Yes") || userInput.equals("y"))
-			campaign=true;
+
 	}
 	public void getStats(Player player){
 		System.out.print("\tCastle: "+player.getCastle()+"\tFence: "+player.getFence()+"\t b:"+player.getBricks()+" w:"+player.getWeapons()+" c:"+player.getCrystals()+

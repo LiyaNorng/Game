@@ -1,7 +1,8 @@
 import java.io.Serializable;
 import java.util.*;
+import java.util.Random;
 
-class Player extends Observable implements PlayerProperty{
+abstract class Player extends Observable implements PlayerProperty{
 	protected int builders;
 	protected int bricks;
 	protected int soldiers;
@@ -15,6 +16,7 @@ class Player extends Observable implements PlayerProperty{
 	protected Hand hand;
 	protected String load;
 	protected int level;
+	protected String description;
 	protected Strategy strategy; //attack or basic
 	
 	public Player(){
@@ -34,6 +36,10 @@ class Player extends Observable implements PlayerProperty{
 			notifyObservers();
 		}
 		strategy= new Basic();
+	}
+	
+	public String getDescription(){
+		return description;
 	}
 	public void setLevel(int level){
 		this.level = level;
