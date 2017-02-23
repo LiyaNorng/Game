@@ -3,9 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package monstercardgame;
 
-import static monstercardgame.MonsterCardGame.playerWin;
 
 /**
  *
@@ -76,8 +74,8 @@ public class AttackTheOpponent implements StrategyForAttack{
         monsterOnField = false;
         for (String in:monsterGame.getTwoPlayer().keySet())
         {
-            Player player = monsterGame.getTwoPlayer().get(in);
-            if (player.getTurn() == false)
+            Trainer player = monsterGame.getTwoPlayer().get(in);
+            if (player.getTurn().equals("0"))
             {
                 if (player.isThereAnyMonsterOnField())
                 {
@@ -101,8 +99,8 @@ public class AttackTheOpponent implements StrategyForAttack{
         opponentHealthBelowZero = false;
         for (String in: monsterGame.getTwoPlayer().keySet())
         {
-            Player player = monsterGame.getTwoPlayer().get(in);
-            if (player.getTurn() == false)
+            Trainer player = monsterGame.getTwoPlayer().get(in);
+            if (player.getTurn().equals("0"))
             {
                 if (player.getHealth() <= 0)
                 {
@@ -128,8 +126,8 @@ public class AttackTheOpponent implements StrategyForAttack{
         opponentMonsterHealthBelowZero = false;
         for (String in: monsterGame.getTwoPlayer().keySet())
         {
-            Player player = monsterGame.getTwoPlayer().get(in);
-            if (player.getTurn() == false)
+            Trainer player = monsterGame.getTwoPlayer().get(in);
+            if (player.getTurn().equals("0"))
             {
                 Cards card = player.getSingleMonsterOnField(key);
                 if (card.getHeartPoint() <= 0)
@@ -152,11 +150,11 @@ public class AttackTheOpponent implements StrategyForAttack{
     
     public AttackTheOpponent attackTheOpponents(MonsterCardGame monsterGame) throws ClassCastException, NullPointerException {
         
-        Player newPlayer = null;
+        Trainer newPlayer = null;
         for (String in: monsterGame.getTwoPlayer().keySet())
         {
             newPlayer = monsterGame.getTwoPlayer().get(in);
-            if (newPlayer.getTurn() == false)
+            if (newPlayer.getTurn().equals("0"))
             {
                 break;
             }

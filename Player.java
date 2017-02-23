@@ -1,161 +1,178 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package monstercardgame;
+import java.io.Serializable;
+import java.util.*;
+import java.util.Random;
 
-import java.util.HashMap;
-import java.util.Map;
-
-/**
- *
- * @author Liya Norng
- */
-
-/**
- * 
- * @param userName is the name of the user
- * @param health is the user health
- * @param numberOfMove is keeping track number of move player has done
- * @param cardsOnHand is a map of cards, like a deck of card on hand
- * @param monsterOnField is a map of cards, like a deck of card on field
- * @param turn is keeping track who turn is it
- * @param computer to keep track whether this player is computer or user
- */
-
-public class Player {
-    
-    private String userName;
-    private int health;
-    private String gender;
-    private int numberOfMove;
-    private Map<String, Cards> cardsOnHand;
-    private Map<String, Cards> monsterOnField;
-    private boolean turn;
-    private boolean computer;
-    
-    public Player(String userName, String gender, boolean turn, boolean computer) {
-        this.userName = userName;
-        this.computer = computer;
-        this.turn = turn;
-        health = 50;
-        this.gender = gender;
-        numberOfMove = 0;
-        cardsOnHand = new HashMap<String, Cards>();
-        monsterOnField = new HashMap<String, Cards>();
-    }
-
-    Player() {
-        
-    }
-
-    public void gotAttack(int value)
-    {
-        health = health - value;
-    }
-    
-    public boolean getComputer() {
-        return computer;
-    }
-
-    public void setComputer(boolean computer) {
-        this.computer = computer;
-    }
-        
-    public void addMonsterToHand(String key, Cards card)
-    {
-        cardsOnHand.put(key, card);
-    }
-    
-    public void addMonsterToField(String key)
-    {
-        monsterOnField.put(key, cardsOnHand.get(key));
-    }
-    
-    public void removeACardFromHand(String key)
-    {
-        cardsOnHand.remove(key);
-    }
-    
-    public boolean isCardsOnHandEmpty()
-    {
-        return cardsOnHand.isEmpty();
-    }
-    
-    public boolean isThereAnyMonsterOnField()
-    {
-        return monsterOnField.isEmpty();
-    }
-    
-    public void removeACardFromField(String key)
-    {
-        monsterOnField.remove(key);
-    }
-    
-    public Cards getSingleCardOnHand(String key)
-    {
-        return cardsOnHand.get(key);
-    }
-      
-    public Cards getSingleMonsterOnField(String key)
-    {
-        return monsterOnField.get(key);
-    }
-        
-    public String getUserName() {
-        return userName;
-    }
-
-    public int getHealth() {
-        return health;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public int getNumberOfMove() {
-        return numberOfMove;
-    }
-    
-    public Map<String, Cards> getCardsOnHand() {
-        return cardsOnHand;
-    }
-
-    public Map<String, Cards> getMonsterOnField() {
-        return monsterOnField;
-    }
-
-    public boolean getTurn() {
-        return turn;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public void setHealth(int health) {
-        this.health = health;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public void setNumberOfMove(int numberOfMove) {
-        this.numberOfMove = numberOfMove;
-    }
-
-    public void setCardsOnHand(Map<String, Cards> cardsOnHand) {
-        this.cardsOnHand = cardsOnHand;
-    }
-
-    public void setMonsterOnField(Map<String, Cards> monsterOnField) {
-        this.monsterOnField = monsterOnField;
-    }
-
-    public void setTurn(boolean turn) {
-        this.turn = turn;
-    }   
+abstract class Player extends Observable implements PlayerProperty{
+	protected int builders;
+	protected int bricks;
+	protected int soldiers;
+	protected int weapons;
+	protected int magic;
+	protected int crystals;
+	protected int castle;
+	protected int fence;
+	protected int point;
+	protected String userName;
+	protected Hand hand;
+	protected String load;
+	protected int level;
+	protected String description;
+	protected Strategy strategy; //attack or basic
+	
+	public Player(){
+		builders=2;
+		bricks=5;
+		soldiers=2;
+		weapons=5;
+		magic=2;
+		crystals=5;
+		castle=30;
+		fence=10;
+		hand=new Hand();
+		for (int i=0;i<hand.size();i++)
+		{
+			addObserver(hand.getCard(i));
+			setChanged();
+			notifyObservers();
+		}
+		strategy= new Basic();
+	}
+	
+	public String getDescription(){
+		return description;
+	}
+	public void setLevel(int level){
+		this.level = level;
+	}
+	public int getLevel(){
+		return level;
+	}
+	public void resetPlayer(){
+		builders=2;
+		bricks=5;
+		soldiers=2;
+		weapons=5;
+		magic=2;
+		crystals=5;
+		castle=30;
+		fence=10;
+	}
+	public String getLoad(){
+		return load;
+	}
+	public void setLoad(String load){
+		this.load = load;
+	}
+	public void setPoint(int point){
+		this.point = point;
+	}
+	public int getPoint(){
+		return point;
+	}
+	public void setUserName(String userName){
+		this.userName = userName;
+	}
+	public String getUserName(){
+		return userName;
+	}
+	public void changeHand(Hand h){
+		hand=h;
+	}
+	public Hand getHand(){
+		return hand;
+	}
+	public void showHand(){
+		hand.displayHand();
+	}
+	public void changeStrategy(Strategy s){strategy=s; }
+	public Move makeMove(){
+		return strategy.getMove(this);
+	}
+	public int getBuilders() {return builders;}
+	public void increaseBuilders() {builders++;}
+	public void decreaseBuilders(){
+		if (builders>0)
+			builders--;
+	}
+	public int getBricks() {return bricks;}
+	public void increaseBricks(int amount) {
+		bricks+=amount;
+		setChanged();
+		notifyObservers();
+	}
+	public void decreaseBricks(int amount){
+		if (amount>bricks)
+			bricks=0;
+		else bricks-=amount;
+		setChanged();
+		notifyObservers();
+	}
+	public int getSoldiers() {return soldiers;}
+	public void increaseSoldiers() {soldiers++;}
+	public void decreaseSoldiers(){
+		if (soldiers>0)
+			soldiers--;
+	} 
+	public int getWeapons() {return weapons;}
+	public void increaseWeapons(int amount) {
+		weapons+=amount;
+		setChanged();
+		notifyObservers();
+	}
+	public void decreaseWeapons(int amount){
+		if (amount>weapons)
+			weapons=0;
+		else weapons-=amount;
+		setChanged();
+		notifyObservers();
+	}
+	public int getMagic() {return magic;}
+	public void increaseMagic() {magic++;}
+	public void decreaseMagic(){
+		if (magic>0)
+			magic--;
+	} 
+	public int getCrystals() {return crystals;}
+	public void increaseCrystals(int amount) {
+		crystals+=amount;
+		setChanged();
+		notifyObservers();
+	}
+	public void decreaseCrystals(int amount){
+		if (amount>crystals)
+			crystals=0;
+		else crystals-=amount;
+		setChanged();
+		notifyObservers();
+	}
+	public int getCastle(){ return castle;}
+	public void buildCastle(int amount) {castle+=amount;}
+	public void destroyCastle(int amount) {castle -=amount;}
+	public int getFence() {return fence;}
+	public void buildFence(int amount) {fence+=amount;}
+	public void destroyFence(int amount){
+		if (amount>fence) fence =0;
+		else fence-=amount;}
+	public Card getCard(int index) {return hand.getCard(index);}
+	public void destroyCard(Card card) {
+		deleteObserver(card);
+		Card newCard=hand.removeCard(card);
+		addObserver(newCard);
+		setChanged();
+		notifyObservers();
+	}
+	public void exchangeCard(Card card, Card newCard)
+	{
+		deleteObserver(card);
+		hand.exchangeCard(card, newCard);
+		addObserver(newCard);
+		setChanged();
+		notifyObservers();
+	}
+	@Override
+	public void update() {
+		// TODO Auto-generated method stub
+		
+	}
+	
 }
